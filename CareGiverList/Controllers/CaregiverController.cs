@@ -13,23 +13,23 @@ namespace CareGiverList.Controllers
     {
         // GET: api/Caregiver
         [HttpGet]
-        public IEnumerable<CareGiver> Get()
+        public IEnumerable<Caregivermodel> Get()
         {
-            List<CareGiver> CareGiverList = new List<CareGiver>();
-            CareGiver b1 = new CareGiver(lastName: "C", firstName: "Amelia", contactNumber: "216 7989 650", discipline: "Home Health Aide");
-            CareGiver b2 = new CareGiver(lastName: "D", firstName: "Olivia", contactNumber: "216 7989 650", discipline: "Home Health Aide");
-            CareGiver b3 = new CareGiver(lastName: "T", firstName: "Isla", contactNumber: "216 7989 650", discipline: "Home Health Aide");
-            CareGiver b4 = new CareGiver(lastName: "H", firstName: "Olivia", contactNumber: "216 7989 650", discipline: "Home Health Aide");
-            CareGiver b5 = new CareGiver(lastName: "B", firstName: "Atticus", contactNumber: "216 7989 650", discipline: "Home Health Aide");
+            List<Caregivermodel> CareGiverList = new List<Caregivermodel>();
+            Caregivermodel b1 = new Caregivermodel(lastName: "C", firstName: "Amelia", contactNumber: "216 7989 650", discipline: "Home Health Aide");
+            Caregivermodel b2 = new Caregivermodel(lastName: "D", firstName: "Olivia", contactNumber: "216 7989 650", discipline: "Home Health Aide");
+            Caregivermodel b3 = new Caregivermodel(lastName: "T", firstName: "Isla", contactNumber: "216 7989 650", discipline: "Home Health Aide");
+            Caregivermodel b4 = new Caregivermodel(lastName: "H", firstName: "Olivia", contactNumber: "216 7989 650", discipline: "Home Health Aide");
+            Caregivermodel b5 = new Caregivermodel(lastName: "B", firstName: "Atticus", contactNumber: "216 7989 650", discipline: "Home Health Aide");
 
-          
+
 
             CareGiverList.Add(b1);
             CareGiverList.Add(b2);
             CareGiverList.Add(b3);
             CareGiverList.Add(b4);
             CareGiverList.Add(b5);
-          
+
 
             return CareGiverList;
         }
@@ -59,21 +59,42 @@ namespace CareGiverList.Controllers
         {
         }
     }
-    public class CareGiver
+    public class Caregivermodel
     {
-        public string lastName { get; set; }
-        public string firstName { get; set; }
-        public string contactNumber { get; set; }
+        public PersonalInfo personalInfo { get; set; }
+        public Contact contact { get; set; }
         public string discipline { get; set; }
 
-        public CareGiver(string lastName, string firstName, string contactNumber, string discipline)
+        
+       
+        public Caregivermodel(string lastName, string firstName, string contactNumber, string discipline)
         {
-            this.lastName = lastName;
-            this.firstName = firstName;
-            this.contactNumber = contactNumber;
+            this.personalInfo= new PersonalInfo(lastName,firstName);
+            this.contact = new Contact(contactNumber);
             this.discipline = discipline;
         }
 
+        public class PersonalInfo
+        {
+            public PersonalInfo(string lastName, string firstName)
+            {
+                this.lastName = lastName;
+                this.firstName = firstName;
+            }
 
+            public string lastName { get; set; }
+            public string firstName { get; set; }
+        }
+        public class Contact
+        {
+        
+
+            public Contact(string contactNumber)
+            {
+                this.contactNumber = contactNumber;
+            }
+
+            public string contactNumber { get; set; }
+        }
     }
 }
